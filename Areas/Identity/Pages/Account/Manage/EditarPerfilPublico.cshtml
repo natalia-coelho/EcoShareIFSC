@@ -1,0 +1,91 @@
+@page
+@using EcoShare.Areas.Fornecedor.Pages;
+@model DadosFornecedores
+@{
+    ViewData["Title"] = "Editar Fornecedor";
+}
+
+<div class="container mt-4">
+    <h2>Editar Perfil Público</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        <div class="row">
+            @if (!string.IsNullOrEmpty(Model.ImagemPerfilUrl))
+            {
+                <img src="@Url.Content(Model.ImagemPerfilUrl)" alt="Foto de perfil" class="img-fluid rounded-circle">
+            }
+            else
+            {
+                <!-- Se não houver imagem, exibir um placeholder -->
+                <img src="@Url.Content(Model.ImagemPerfilUrl)" alt="Foto de perfil" class="img-fluid rounded-circle">
+            }
+            <div class="col-md-3">
+                <img src="https://placehold.it/200x200" alt="Foto de perfil" class="img-fluid rounded-circle">
+                <input type="file" class="form-control mt-2" name="FotoPerfil" accept="image/*">
+            </div>
+            <div class="col-md-9">
+                <div class="form-group">
+                    <label for="Nome">Nome do Fornecedor</label>
+                    <input type="text" class="form-control" id="Nome" name="Nome" value="@Model.Nome">
+                </div>
+                <div class="form-group">
+                    <label for="Endereco">Endereço</label>
+                    <input type="text" class="form-control" id="Endereco" name="Endereco" value="@Model.Endereco">
+                </div>
+                <div class="form-group">
+                    <label for="HorarioAtendimento">Horário de Atendimento</label>
+                    <input type="text" class="form-control" id="HorarioAtendimento" name="HorarioAtendimento"
+                        value="@Model.HorarioAtendimento">
+                </div>
+                <div class="form-group">
+                    <label for="Descricao">Descrição</label>
+                    <textarea class="form-control" id="Descricao" name="Descricao" rows="4">@Model.Descricao</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Redes Sociais -->
+        <div class="form-group mt-3">
+            <label>Redes Sociais</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">WhatsApp</span>
+                </div>
+                <input type="text" class="form-control" name="Whatsapp" value="@Model.Whatsapp">
+            </div>
+            <div class="input-group mt-2">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Instagram</span>
+                </div>
+                <input type="text" class="form-control" name="Instagram" value="@Model.Instagram">
+            </div>
+            <!-- Adicione mais redes sociais conforme necessário -->
+        </div>
+
+        <!-- Carrossel de Produtos -->
+        <div class="form-group mt-4">
+            <label>Produtos</label>
+            <div class="d-flex flex-wrap">
+                @for (int i = 0; i < Model.Produtos.Count; i++)
+                {
+                    <div class="card mr-3 mb-3" style="width: 200px;">
+                        <img src="https://placehold.it/200x200" alt="Imagem do Produto" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">Nome do Produto</h5>
+                            <p class="card-text">Descrição do Produto</p>
+                        </div>
+                    </div>
+                }
+                <div class="card mb-3" style="width: 200px;">
+                    <img src="https://placehold.it/200x200" alt="Imagem do Produto" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title">Nome do Produto</h5>
+                        <p class="card-text">Descrição do Produto</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar Alterações</button>
+    </form>
+</div>

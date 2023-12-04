@@ -1,0 +1,52 @@
+@page
+@model ListaFornecedorModel
+@{
+    ViewData["Title"] = "Fornecedores";
+}
+
+<div class="container mt-5">
+    <h1>Fornecedores</h1>
+
+@if (User.IsInRole(""))
+{
+        <form>
+            <div class="input-group mb-3">
+                <input type="search" class="form-control rounded" placeholder="Procurar Fornecedores" aria-label="Search"
+                    aria-describedby="search-addon" asp-for="SearchString" />
+                <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Pesquisar</button>
+            </div>
+        </form>
+}
+
+    <!-- Filter Icons (placeholders for future functionality) -->
+    @* <div class="mb-3">
+    <i class="fas fa-filter"></i> Filtrar
+    </div> *@
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Foto de Perfil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Fornecedor is not null)
+            {
+                @foreach (var fornecedor in Model.Fornecedor)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => fornecedor.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => fornecedor.Descricao)</td>
+                        <td style="height: 200px">
+                            <a href="Fornecedor/Info/@fornecedor.Id" asp-area="Fornecedor" asp-page="Info" asp-route-id="@fornecedor.Id">
+                                <img src="@fornecedor.ImagemPerfilUrl" alt="Imagem do Fornecedor" style="width: 200px; width: auto\9; height: auto; object-fit: cover;" class="img-fluid rounded-circle"/>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,50 @@
+@page "{id:guid}"
+@model VisualizarFornecedor
+@{
+    ViewData["Title"] = "Visualizar Fornecedor";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Foto de perfil -->
+            <img src=@Model.Fornecedor.ImagemPerfilUrl
+                alt="Foto de perfil" class="img-fluid rounded-circle">
+        </div>
+        <div class="col-md-9">
+            <!-- Informações do fornecedor -->
+            <h2>@Model.Fornecedor.Nome</h2>
+            <p>Endereço: @Model.Fornecedor.Endereco</p>
+            <p>Horário de Atendimento: @Model.Fornecedor.HorarioAtendimento</p>
+            <p>Descrição: @Model.Fornecedor.Descricao</p>
+            <p>Aprovado desde: @Model.Fornecedor.DataAprovacao.ToShortDateString()</p>
+
+            <!-- Redes Sociais -->
+            <div class="mb-3">
+                <a href="" target="_blank" class="btn btn-outline-primary">Whatsapp</a>
+                <a href=@Model.Fornecedor.Instagram target="_blank" class="btn btn-outline-primary">Instagram</a>
+                <!-- Adicione mais redes sociais conforme necessário -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Carrossel de produtos -->
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h3>Produtos</h3>
+            <div class="d-flex flex-nowrap overflow-auto">
+                @foreach (var produto in Model.Fornecedor.Produtos)
+                {
+                    <div class="card mr-3" style="width: 200px;"> <!-- Defina o tamanho desejado aqui -->
+                        <img src="@produto.UrlImagem" alt="Imagem do Produto" class="card-img-top"
+                            style="height: 200px; object-fit: cover;"> <!-- Defina o tamanho desejado aqui -->
+                        <div class="card-body">
+                            <h5 class="card-title">@produto.Nome</h5>
+                            <p class="card-text">@produto.Descricao</p>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

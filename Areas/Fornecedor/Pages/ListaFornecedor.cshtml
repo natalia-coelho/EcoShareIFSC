@@ -1,0 +1,73 @@
+@page
+@model ListaFornecedorModel
+@{
+    ViewData["Title"] = "Fornecedores";
+}
+
+<div class="container mt-5">
+    <h1>Fornecedores</h1>
+
+    @* Barra de Pesquisa para o Fornecedor *@
+    @* @if (User.IsInRole("Consumidor"))
+    {
+            <form>
+                <div class="input-group mb-3">
+                    <input type="search" class="form-control rounded" placeholder="Procurar Fornecedores" aria-label="Search"
+                        aria-describedby="search-addon" asp-for="SearchString" />
+                    <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Pesquisar</button>
+                </div>
+            </form>
+    } *@
+
+    <!-- Filter Icons (placeholders for future functionality) -->
+    @* <div class="mb-3">
+    <i class="fas fa-filter"></i> Filtrar
+    </div> *@
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Foto de Perfil</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Fornecedor is not null)
+            {
+                @foreach (var fornecedor in Model.Fornecedor)
+                {
+                    <tr>
+                        <td>
+                            <a asp-area="Fornecedor/Info" asp-page="Info" asp-route-id="@fornecedor.Id">
+                                @Html.DisplayFor(modelItem => fornecedor.Nome)
+                            </a>
+                        </td>
+                        <td>@Html.DisplayFor(modelItem => fornecedor.Descricao)</td>
+                        <td>
+                            <img src="@fornecedor.ImagemPerfilUrl" alt="Imagem do Fornecedor" />
+                        </td>
+                        {{-- <td class="max-width:200px">@Html.DisplayFor(modelItem => fornecedor.ImagemPerfilUrl)</td> --}}
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+<table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Foto</th>
+                <th>Categorias</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Batata Corp</td>
+                
+                <td><a href="./Fornecedor/VisualizarFornecedor"><img src="https://play-lh.googleusercontent.com/9UDY3O4wSwlBm-kHHfjKf85Yk5GCt0nckL5ZdMR-nYotAfNjODvR4sZ-scPXG3ABVF65=w240-h480-rw" alt="Batata"></a></td>
+                <td>Batata</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

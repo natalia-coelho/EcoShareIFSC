@@ -1,0 +1,54 @@
+@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Produtos";
+}
+
+<div class="container mt-5">
+    <h1>Produtos</h1>
+
+        <form>
+            <div class="input-group mb-3">
+                <input type="search" class="form-control rounded" placeholder="Procurar Produtos" aria-label="Search"
+                    aria-describedby="search-addon" asp-for="SearchString" />
+                <button type="submit" class="btn btn-primary" data-mdb-ripple-init>Pesquisar</button>
+            </div>
+        </form>
+
+
+    <!-- Filter Icons (placeholders for future functionality) -->
+    @* <div class="mb-3">
+    <i class="fas fa-filter"></i> Filtrar
+    </div> *@
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Preço</th>
+                <th>Descrição</th>
+                <th>Foto</th>
+                <!-- <th>Estoque</th> -->
+                @* <th>Categorias</th> *@
+                <!-- <th>Fornecedor</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Produtos is not null)
+            {
+                @foreach (var product in Model.Produtos)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => product.Nome)</td>
+                        <td>@Html.DisplayFor(modelItem => product.Preco)</td>
+                        <td>@Html.DisplayFor(modelItem => product.Descricao)</td>
+                        <td><img src="@product.UrlImagem" alt="Imagem de @product.Nome"></td>
+                        @*<td>@Html.DisplayFor(modelItem => product.Estoque)</td>*@
+                        @* <td>@Html.DisplayFor(modelItem => product.Categoria)</td> *@
+                        <!-- <td>@Html.DisplayFor(modelItem => product.Fornecedor.Nome)</td> -->
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,33 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    @if (User.IsInRole("Administrador"))
+    {
+        <h1 class="display-4">EcoShare - Administrador</h1>
+        <h3>Gerencie seu sistema da melhor forma.</h3>
+    }
+    else if (User.IsInRole("Fornecedor Pendente"))
+    {
+        <h1 class="display-4">EcoShare - Fornecedor</h1>
+        <p>Seu perfil está pendente de aprovação! Aguarde nosso contato por email.</p>
+    }
+    else if (User.IsInRole("Fornecedor Aprovado"))
+    {
+        <h1 class="display-4">EcoShare - Fornecedor</h1>
+    }
+    else if (User.IsInRole("Consumidor"))
+    {
+        <h1 class="display-4">EcoShare - Consumidor</h1>
+        <h2>Seja bem-vindo!</h2>
+    }
+    else
+    {
+        <h1 class="display-4">EcoShare</h1>
+        <h3>Ecologia de ponta a ponta.</h3>
+        <p>Entre em sua conta para continuar</p>
+    }
+</div>

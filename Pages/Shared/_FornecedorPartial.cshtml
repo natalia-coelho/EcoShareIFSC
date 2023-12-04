@@ -1,0 +1,12 @@
+@using Microsoft.AspNetCore.Identity
+@using EcoShare.Areas.Identity.Data
+
+@inject SignInManager<Usuario> SignInManager
+@inject UserManager<Usuario> UserManager
+
+@if (User.IsInRole("Fornecedor Aprovado"))
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="Produto" asp-page="ListaProdutos">Meus Produtos</a>
+    </li>
+}

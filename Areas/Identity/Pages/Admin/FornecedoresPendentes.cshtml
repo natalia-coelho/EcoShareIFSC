@@ -1,0 +1,64 @@
+@page
+@model FornecedoresPendentesModel
+@{
+    ViewData["Title"] = "Fornecedores Pendentes";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Usuário</th>
+            <th>Telefone</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <form id="form-fornecedor" method="post">
+            @if (Model.FornecedoresPendentes != null)
+            {
+                @foreach (var account in Model.FornecedoresPendentes)
+                {
+                    <tr>
+                        <td>@account.UserName</td>
+                        <td>@account.NumeroTelefone</td>
+                        <td>
+                            <button type="submit" asp-route-username="@account.UserName" asp-page-handler="AprovarFornecedor"
+                                class="btn btn-success">Aprovar</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </form>
+    </tbody>
+</table>
+
+<h3>Fornecedores Aprovados</h3>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Usuário</th>
+            <th>Telefone</th>
+        </tr>
+    </thead>
+    <tbody>
+        <form id="form-fornecedor" method="post">.
+            @if (Model.FornecedoresAprovados != null)
+            {
+                @foreach (var account in Model.FornecedoresAprovados)
+                {
+                    <tr>
+                        <td>@account.UserName</td>
+                        <td>@account.NumeroTelefone</td>
+                    </tr>
+                }
+            }
+        </form>
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

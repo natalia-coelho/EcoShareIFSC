@@ -1,0 +1,63 @@
+@page
+@model ListaProdutosModel
+@{
+    ViewData["Title"] = "Produtos Cadastrados";
+}
+@* Essa página é a lista de produtos pertencentes a um fornecedor (crud) *@
+
+<h3>@ViewData["Title"]</h3>
+
+<a class="btn btn-primary mb-3" asp-area="Produto" asp-page="AdicionarProduto">Cadastrar Novo Produto</a>
+
+@* <form asp-page="./Index" method="get">
+<div class="form-actions no-color">
+<p>
+Pesquisar:
+<input type="text" name="SearchString" value="a" />
+<input type="submit" value="Search" class="btn btn-primary" />
+<a class="btn btn-secondary" asp-page="./Index">Ver lista completa</a>
+</p>
+</div>
+</form> *@
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Nome do Produto</th>
+            <th>Preço</th>
+            <th>Descrição</th>
+            <th>Estoque</th>
+            @* <th>Categoria</th> *@
+            <th>Fornecedor</th>
+            <th>Imagem</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Produtos is not null)
+        {
+            @foreach (var produto in Model.Produtos)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => produto.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => produto.Preco)</td>
+                    <td>@Html.DisplayFor(modelItem => produto.Descricao)</td>
+                    <td>@Html.DisplayFor(modelItem => produto.Estoque)</td>
+                    @* <td>@Html.DisplayFor(modelItem => produto.Categoria)</td> *@
+                    <!-- <td>@Html.DisplayFor(modelItem => produto.Fornecedor)</td> -->
+                    <td><img src=@produto.UrlImagem alt="Imagem de @produto.Nome"></td>
+                    <td>
+                        <a class="btn btn-primary" asp-area="Produto" asp-page="EditarProduto"
+                            asp-route-id="@produto.Id">Editar</a>
+                        <a class="btn btn-danger" asp-area="Produto" asp-page="ExcluirProduto"
+                            asp-route-id="@produto.Id">Excluir</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
